@@ -1,98 +1,111 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import CategoryFilter from "@/components/CategoryFilter";
+import MissionCard from "@/components/MissionCard";
+import SearchBar from "@/components/SearchBar";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorState from "@/components/ui/ErrorState";
+import { MissionCardSkeleton } from "@/components/ui/LoadingSkeleton";
+import { useAuthContext } from "@/contexts/AuthContext";
+import { useMissions } from "@/hooks/useMissions";
+import type { Category, Mission } from "@/types";
+import { Leaf } from "lucide-react-native";
+import React, { useCallback, useState } from "react";
+import {
+    FlatList,
+    RefreshControl,
+    Text,
+    View,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+export default function ExploreScreen() {
+    const insets = useSafeAreaInsets();
+    const { user } = useAuthContext();
+    const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+    const [searchQuery, setSearchQuery] = useState("");
 
-export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
+    const {
+        data: missions,
+        isLoading,
+        isError,
+        error,
+        refetch,
+        isRefetching,
+    } = useMissions(selectedCategory ?? undefined, searchQuery);
+
+    const handleRefresh = useCallback(() => {
+        refetch();
+    }, [refetch]);
+
+    const renderMission = useCallback(
+        ({ item }: { item: Mission }) => <MissionCard mission={item} />,
+        []
+    );
+
+    const keyExtractor = useCallback((item: Mission) => item.id, []);
+
+    return (
+        <View className="flex-1 bg-slate-50" style={{ paddingTop: insets.top }}>
+            {/* Header */}
+            <View className="px-6 pt-4 pb-4">
+                <View className="flex-row items-center justify-between">
+                    <View>
+                        <Text className="text-slate-500 text-sm">Bonjour 👋</Text>
+                        <Text className="text-2xl font-bold text-slate-800">
+                            {user?.name || "Bénévole"}
+                        </Text>
+                    </View>
+                    <View className="bg-emerald-100 rounded-full p-2.5">
+                        <Leaf size={24} color="#10B981" />
+                    </View>
+                </View>
+                <Text className="text-slate-500 mt-2 text-sm">
+                    Découvrez les missions près de chez vous
+                </Text>
+            </View>
+
+            {/* Search */}
+            <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
+
+            {/* Category Filter */}
+            <CategoryFilter
+                selected={selectedCategory}
+                onSelect={setSelectedCategory}
             />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-  );
+            {/* Mission List */}
+            {isLoading ? (
+                <View className="flex-1">
+                    {[1, 2, 3].map((i) => (
+                        <MissionCardSkeleton key={i} />
+                    ))}
+                </View>
+            ) : isError ? (
+                <ErrorState
+                    message={(error as Error)?.message || "Impossible de charger les missions"}
+                    onRetry={handleRefresh}
+                />
+            ) : missions && missions.length === 0 ? (
+                <EmptyState
+                    title="Aucune mission trouvée"
+                    description="Essayez de modifier vos filtres ou votre recherche"
+                />
+            ) : (
+                <FlatList
+                    data={missions}
+                    renderItem={renderMission}
+                    keyExtractor={keyExtractor}
+                    contentContainerStyle={{ paddingBottom: 20 }}
+                    showsVerticalScrollIndicator={false}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={isRefetching}
+                            onRefresh={handleRefresh}
+                            tintColor="#10B981"
+                            colors={["#10B981"]}
+                        />
+                    }
+                />
+            )}
+        </View>
+    );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
