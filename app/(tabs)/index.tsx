@@ -7,7 +7,7 @@ import { MissionCardSkeleton } from "@/components/ui/LoadingSkeleton";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useMissions } from "@/hooks/useMissions";
 import type { Category, Mission } from "@/types";
-import { Leaf } from "lucide-react-native";
+import { Leaf, TrendingUp } from "lucide-react-native";
 import React, { useCallback, useState } from "react";
 import {
     FlatList,
@@ -46,7 +46,7 @@ export default function ExploreScreen() {
     return (
         <View className="flex-1 bg-slate-50" style={{ paddingTop: insets.top }}>
             {/* Header */}
-            <View className="px-6 pt-4 pb-4">
+            <View className="px-6 pt-4 pb-2">
                 <View className="flex-row items-center justify-between">
                     <View>
                         <Text className="text-slate-500 text-sm">Bonjour 👋</Text>
@@ -58,9 +58,28 @@ export default function ExploreScreen() {
                         <Leaf size={24} color="#10B981" />
                     </View>
                 </View>
-                <Text className="text-slate-500 mt-2 text-sm">
-                    Découvrez les missions près de chez vous
-                </Text>
+            </View>
+
+            {/* Eco Impact Banner */}
+            <View
+                className="mx-4 mb-4 rounded-2xl p-4 flex-row items-center"
+                style={{
+                    backgroundColor: "#ECFDF5",
+                    borderWidth: 1,
+                    borderColor: "#A7F3D0",
+                }}
+            >
+                <View className="bg-emerald-500 rounded-xl p-2 mr-3">
+                    <TrendingUp size={18} color="#FFFFFF" />
+                </View>
+                <View className="flex-1">
+                    <Text className="text-sm font-bold text-emerald-800">
+                        🌍 Ensemble, faisons la différence
+                    </Text>
+                    <Text className="text-xs text-emerald-600 mt-0.5">
+                        {missions?.length || 0} missions disponibles près de chez vous
+                    </Text>
+                </View>
             </View>
 
             {/* Search */}

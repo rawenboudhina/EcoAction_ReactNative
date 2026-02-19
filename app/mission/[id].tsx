@@ -9,6 +9,7 @@ import {
     useMyParticipations,
 } from "@/hooks/useParticipations";
 import { CATEGORIES } from "@/types";
+import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import {
     ArrowLeft,
@@ -175,9 +176,15 @@ export default function MissionDetailScreen() {
                         style={{ height: 320 }}
                         resizeMode="cover"
                     />
-                    <View
-                        className="absolute inset-0"
-                        style={{ backgroundColor: "rgba(0,0,0,0.15)" }}
+                    <LinearGradient
+                        colors={["rgba(0,0,0,0.1)", "rgba(0,0,0,0.65)"]}
+                        style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                        }}
                     />
 
                     {/* Back button */}
@@ -386,10 +393,26 @@ export default function MissionDetailScreen() {
                         </Text>
                     </View>
 
-                    {/* Description */}
+                    {/* Why Participate */}
+                    <View
+                        className="bg-emerald-50 rounded-3xl p-5 mb-5"
+                        style={{
+                            borderWidth: 1,
+                            borderColor: "#A7F3D0",
+                        }}
+                    >
+                        <Text className="text-base font-bold text-emerald-800 mb-2">
+                            💚 Pourquoi participer ?
+                        </Text>
+                        <Text className="text-sm text-emerald-700 leading-5">
+                            {mission.description.split("\n")[0]}
+                        </Text>
+                    </View>
+
+                    {/* Full Description */}
                     <View className="mb-6">
                         <Text className="text-lg font-bold text-slate-800 mb-3">
-                            À propos
+                            📋 À propos de cette mission
                         </Text>
                         <Text className="text-[15px] text-slate-600 leading-6">
                             {mission.description}

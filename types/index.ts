@@ -10,16 +10,18 @@ export interface CategoryInfo {
   key: Category;
   label: string;
   icon: string;
+  emoji: string;
   color: string;
 }
 
 export const CATEGORIES: CategoryInfo[] = [
-  { key: "beach-cleanup", label: "Plages", icon: "waves", color: "#0EA5E9" },
-  { key: "tree-planting", label: "Arbres", icon: "tree-pine", color: "#22C55E" },
-  { key: "zero-waste", label: "Zéro Déchet", icon: "recycle", color: "#F59E0B" },
-  { key: "recycling", label: "Recyclage", icon: "package", color: "#8B5CF6" },
-  { key: "education", label: "Éducation", icon: "book-open", color: "#EC4899" },
+  { key: "beach-cleanup", label: "Plages", icon: "waves", emoji: "🏖️", color: "#0EA5E9" },
+  { key: "tree-planting", label: "Arbres", icon: "tree-pine", emoji: "🌳", color: "#22C55E" },
+  { key: "zero-waste", label: "Zéro Déchet", icon: "recycle", emoji: "♻️", color: "#F59E0B" },
+  { key: "recycling", label: "Recyclage", icon: "package", emoji: "📦", color: "#8B5CF6" },
+  { key: "education", label: "Éducation", icon: "book-open", emoji: "📚", color: "#EC4899" },
 ];
+
 
 // ─── User ──────────────────────────────────────────────────────
 export interface User {
