@@ -113,7 +113,7 @@ export default function ExploreScreen() {
                     data={missions}
                     renderItem={renderMission}
                     keyExtractor={keyExtractor}
-                    contentContainerStyle={{ paddingBottom: 20 }}
+                    contentContainerStyle={{ paddingBottom: 120 }}
                     showsVerticalScrollIndicator={false}
                     refreshControl={
                         <RefreshControl

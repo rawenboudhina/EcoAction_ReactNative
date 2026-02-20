@@ -1,50 +1,162 @@
-# Welcome to your Expo app 👋
+# 🌿 EcoAction — Plateforme de Bénévolat Environnemental
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+> Application mobile React Native permettant aux citoyens de découvrir, rejoindre et gérer des missions de bénévolat écologique (nettoyage de plages, plantation d'arbres, ateliers zéro déchet, recyclage, éducation environnementale).
 
-## Get started
+---
 
-1. Install dependencies
+## 📸 Fonctionnalités
 
-   ```bash
-   npm install
-   ```
+| Fonctionnalité | Description |
+|---|---|
+| 🔐 **Authentification** | Inscription / Connexion avec persistance de session (SecureStore) |
+| 🗺️ **Explorer** | Parcourir les missions disponibles avec recherche et filtres par catégorie |
+| 📋 **Détail mission** | Page détaillée avec image, description, lieu, date, places disponibles |
+| ✅ **Participer** | Rejoindre une mission avec **Optimistic UI** (mise à jour instantanée) |
+| ❌ **Annuler** | Annuler sa participation avec rollback optimiste en cas d'erreur |
+| 📅 **Mes Missions** | Visualiser toutes ses participations confirmées |
+| 👤 **Profil** | Statistiques personnelles (missions, heures, arbres plantés) et déconnexion |
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🛠️ Stack Technique
 
-In the output, you'll find options to open the app in a
+| Technologie | Rôle |
+|---|---|
+| [Expo SDK 54](https://expo.dev/) | Framework React Native |
+| [Expo Router](https://docs.expo.dev/router/introduction/) | Navigation basée sur le système de fichiers |
+| [TypeScript](https://www.typescriptlang.org/) | Typage statique strict |
+| [NativeWind](https://www.nativewind.dev/) (TailwindCSS) | Styling utilitaire |
+| [TanStack Query v5](https://tanstack.com/query/latest) | Gestion du cache, fetching, mutations avec Optimistic UI |
+| [JSON-Server](https://github.com/typicode/json-server) | API REST mock (backend local) |
+| [Expo SecureStore](https://docs.expo.dev/versions/latest/sdk/securestore/) | Stockage sécurisé de la session utilisateur |
+| [Lucide React Native](https://lucide.dev/) | Icônes modernes |
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📁 Architecture du Projet
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+my-app/
+├── api/                        # Couche API (fonctions fetch typées)
+│   ├── client.ts               #   Client HTTP générique (GET, POST, PATCH, DELETE)
+│   ├── missions.ts             #   Endpoints missions
+│   ├── auth.ts                 #   Endpoints authentification
+│   └── participations.ts       #   Endpoints participations
+├── app/                        # Écrans (Expo Router – file-based routing)
+│   ├── _layout.tsx             #   Layout racine (QueryClientProvider + AuthProvider)
+│   ├── index.tsx               #   Redirection selon état d'authentification
+│   ├── (auth)/                 #   Groupe authentification
+│   │   ├── _layout.tsx
+│   │   ├── login.tsx
+│   │   └── register.tsx
+│   ├── (tabs)/                 #   Groupe onglets (navigation principale)
+│   │   ├── _layout.tsx         #     Tab bar personnalisée
+│   │   ├── index.tsx           #     Explorer les missions
+│   │   ├── my-missions.tsx     #     Mes participations
+│   │   └── profile.tsx         #     Profil utilisateur
+│   └── mission/
+│       └── [id].tsx            #   Détail d'une mission (route dynamique)
+├── components/                 # Composants réutilisables
+│   ├── ui/                     #   Composants atomiques (Button, Badge, Skeleton, etc.)
+│   ├── MissionCard.tsx         #   Carte de mission
+│   ├── CategoryFilter.tsx      #   Filtre horizontal par catégorie
+│   ├── SearchBar.tsx           #   Barre de recherche
+│   └── StatCard.tsx            #   Carte de statistique profil
+├── contexts/
+│   └── AuthContext.tsx         # Context React pour l'authentification
+├── hooks/                      # Hooks TanStack Query
+│   ├── useMissions.ts          #   Requêtes missions (useQuery)
+│   ├── useParticipations.ts    #   Mutations participation (Optimistic UI)
+│   └── useAuth.ts              #   Requête utilisateur
+├── types/
+│   └── index.ts                # Interfaces TypeScript (User, Mission, Participation, etc.)
+├── db.json                     # Données seed pour JSON-Server
+├── package.json
+├── tailwind.config.js
+└── tsconfig.json
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 🚀 Installation & Lancement
 
-To learn more about developing your project with Expo, look at the following resources:
+### Prérequis
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- **Node.js** ≥ 18
+- **npm** ou **yarn**
+- **Expo Go** sur votre appareil mobile (ou un émulateur Android/iOS)
 
-## Join the community
+### 1. Cloner le dépôt
 
-Join our community of developers creating universal apps.
+```bash
+git clone https://github.com/<votre-username>/EcoActionReactNative.git
+cd EcoActionReactNative/my-app
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 2. Installer les dépendances
+
+```bash
+npm install
+```
+
+### 3. Démarrer le serveur JSON (backend mock)
+
+```bash
+npm run server
+```
+
+> Le serveur API sera accessible sur `http://localhost:3000`. L'application détecte automatiquement l'IP de votre machine via Expo pour les appareils physiques.
+
+### 4. Démarrer l'application Expo
+
+```bash
+npx expo start
+```
+
+Scannez le QR code avec **Expo Go** ou lancez sur un émulateur.
+
+### Comptes de test
+
+| Email | Mot de passe |
+|---|---|
+| `rawen@eco.com` | `password123` |
+| `amira@eco.com` | `password123` |
+| `youssef@eco.com` | `password123` |
+
+---
+
+## 📡 Endpoints API (JSON-Server)
+
+| Méthode | Endpoint | Description |
+|---|---|---|
+| `GET` | `/missions` | Liste des missions |
+| `GET` | `/missions/:id` | Détail d'une mission |
+| `GET` | `/missions?category=xxx` | Missions par catégorie |
+| `GET` | `/users?email=xxx` | Recherche d'utilisateur |
+| `POST` | `/users` | Inscription |
+| `GET` | `/participations?userId=xxx` | Participations d'un utilisateur |
+| `POST` | `/participations` | Rejoindre une mission |
+| `DELETE` | `/participations/:id` | Annuler une participation |
+| `PATCH` | `/missions/:id` | Mettre à jour les places |
+
+---
+
+## ✅ Vérification
+
+```bash
+# Vérifier le typage TypeScript
+npx tsc --noEmit
+
+# Lancer le linting
+npm run lint
+
+# Tester les endpoints API
+curl http://localhost:3000/missions
+curl http://localhost:3000/users
+```
+
+---
+
+## 👤 Auteur
+
+**Rawen** — Mini-projet React Native

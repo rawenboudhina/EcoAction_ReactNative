@@ -176,7 +176,7 @@ export default function MyMissionsScreen() {
                     data={participations}
                     renderItem={renderItem}
                     keyExtractor={keyExtractor}
-                    contentContainerStyle={{ paddingBottom: 20 }}
+                    contentContainerStyle={{ paddingBottom: 120 }}
                     showsVerticalScrollIndicator={false}
                     refreshControl={
                         <RefreshControl

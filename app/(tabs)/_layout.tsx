@@ -7,18 +7,54 @@ interface TabIconProps {
     icon: React.ReactNode;
     label: string;
     focused: boolean;
+    color: string;
 }
 
-function TabIcon({ icon, label, focused }: TabIconProps) {
+function TabIcon({ icon, label, focused, color }: TabIconProps) {
     return (
-        <View className="items-center justify-center pt-2">
-            {icon}
-            <Text
-                className={`text-[10px] mt-1 ${focused ? "text-emerald-500 font-bold" : "text-slate-400"
-                    }`}
+        <View
+            style={{
+                alignItems: "center",
+                justifyContent: "center",
+                paddingTop: 8,
+                minWidth: 64,
+            }}
+        >
+            <View
+                style={{
+                    backgroundColor: focused ? `${color}18` : "transparent",
+                    borderRadius: 16,
+                    paddingHorizontal: 16,
+                    paddingVertical: 8,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "row",
+                    gap: 6,
+                }}
             >
-                {label}
-            </Text>
+                {icon}
+                {focused && (
+                    <Text
+                        style={{
+                            fontSize: 12,
+                            fontWeight: "800",
+                            color: color,
+                        }}
+                    >
+                        {label}
+                    </Text>
+                )}
+            </View>
+            {/* Active indicator dot */}
+            <View
+                style={{
+                    width: 5,
+                    height: 5,
+                    borderRadius: 3,
+                    backgroundColor: focused ? color : "transparent",
+                    marginTop: 4,
+                }}
+            />
         </View>
     );
 }
@@ -30,16 +66,21 @@ export default function TabLayout() {
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
+                    position: "absolute",
+                    bottom: Platform.OS === "ios" ? 24 : 16,
+                    left: 20,
+                    right: 20,
                     backgroundColor: "#FFFFFF",
-                    borderTopWidth: 1,
-                    borderTopColor: "#F1F5F9",
-                    height: Platform.OS === "ios" ? 88 : 65,
-                    paddingBottom: Platform.OS === "ios" ? 24 : 8,
-                    elevation: 8,
-                    shadowColor: "#000",
-                    shadowOffset: { width: 0, height: -4 },
-                    shadowOpacity: 0.05,
-                    shadowRadius: 12,
+                    borderRadius: 28,
+                    height: 72,
+                    borderTopWidth: 0,
+                    shadowColor: "#0F172A",
+                    shadowOffset: { width: 0, height: 8 },
+                    shadowOpacity: 0.12,
+                    shadowRadius: 24,
+                    elevation: 16,
+                    paddingBottom: 0,
+                    paddingHorizontal: 8,
                 },
             }}
         >
@@ -50,13 +91,14 @@ export default function TabLayout() {
                         <TabIcon
                             icon={
                                 <Compass
-                                    size={24}
+                                    size={22}
                                     color={focused ? "#10B981" : "#94A3B8"}
-                                    strokeWidth={focused ? 2.5 : 2}
+                                    strokeWidth={focused ? 2.5 : 1.8}
                                 />
                             }
                             label="Explorer"
                             focused={focused}
+                            color="#10B981"
                         />
                     ),
                 }}
@@ -68,13 +110,14 @@ export default function TabLayout() {
                         <TabIcon
                             icon={
                                 <CalendarCheck
-                                    size={24}
-                                    color={focused ? "#10B981" : "#94A3B8"}
-                                    strokeWidth={focused ? 2.5 : 2}
+                                    size={22}
+                                    color={focused ? "#0EA5E9" : "#94A3B8"}
+                                    strokeWidth={focused ? 2.5 : 1.8}
                                 />
                             }
-                            label="Mes Missions"
+                            label="Missions"
                             focused={focused}
+                            color="#0EA5E9"
                         />
                     ),
                 }}
@@ -86,13 +129,14 @@ export default function TabLayout() {
                         <TabIcon
                             icon={
                                 <UserCircle
-                                    size={24}
-                                    color={focused ? "#10B981" : "#94A3B8"}
-                                    strokeWidth={focused ? 2.5 : 2}
+                                    size={22}
+                                    color={focused ? "#8B5CF6" : "#94A3B8"}
+                                    strokeWidth={focused ? 2.5 : 1.8}
                                 />
                             }
                             label="Profil"
                             focused={focused}
+                            color="#8B5CF6"
                         />
                     ),
                 }}

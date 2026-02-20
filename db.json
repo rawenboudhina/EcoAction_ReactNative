@@ -40,7 +40,7 @@
       "date": "2026-03-15T09:00:00.000Z",
       "location": "Plage de Hammamet, Tunisie",
       "spotsTotal": 30,
-      "spotsTaken": 28,
+      "spotsTaken": 30,
       "image": "https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=800&q=80",
       "organizer": "EcoAction Tunisie",
       "duration": "3 heures"
@@ -53,7 +53,7 @@
       "date": "2026-03-22T08:00:00.000Z",
       "location": "Parc Ennahli, Ariana, Tunisie",
       "spotsTotal": 50,
-      "spotsTaken": 32,
+      "spotsTaken": 43,
       "image": "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&q=80",
       "organizer": "Green Tunisia",
       "duration": "4 heures"
@@ -92,7 +92,7 @@
       "date": "2026-04-19T10:00:00.000Z",
       "location": "École Primaire Carthage, Tunisie",
       "spotsTotal": 15,
-      "spotsTaken": 12,
+      "spotsTaken": 14,
       "image": "https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?w=800&q=80",
       "organizer": "Éducation Verte",
       "duration": "5 heures"
@@ -105,7 +105,7 @@
       "date": "2026-05-03T08:30:00.000Z",
       "location": "Sidi Bou Saïd, Tunisie",
       "spotsTotal": 40,
-      "spotsTaken": 22,
+      "spotsTaken": 29,
       "image": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
       "organizer": "Protégeons nos Côtes",
       "duration": "3 heures"
@@ -326,6 +326,160 @@
       "missionId": "1",
       "status": "confirmed",
       "joinedAt": "2026-02-19T13:34:05.273Z"
+    },
+    {
+      "id": "5e76",
+      "userId": "1",
+      "missionId": "5",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:02:15.732Z"
+    },
+    {
+      "id": "c891",
+      "userId": "1",
+      "missionId": "5",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:02:17.016Z"
+    },
+    {
+      "id": "d8ca",
+      "userId": "1",
+      "missionId": "1",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:04:57.153Z"
+    },
+    {
+      "id": "d4a1",
+      "userId": "1",
+      "missionId": "1",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:04:59.941Z"
+    },
+    {
+      "id": "573d",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:05:22.807Z"
+    },
+    {
+      "id": "e423",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:05:24.234Z"
+    },
+    {
+      "id": "725e",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:05:25.716Z"
+    },
+    {
+      "id": "8964",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:05:26.732Z"
+    },
+    {
+      "id": "539e",
+      "userId": "1",
+      "missionId": "6",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:05:34.764Z"
+    },
+    {
+      "id": "c8c5",
+      "userId": "1",
+      "missionId": "6",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:05:35.749Z"
+    },
+    {
+      "id": "9fa3",
+      "userId": "1",
+      "missionId": "6",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:05:44.615Z"
+    },
+    {
+      "id": "2e05",
+      "userId": "1",
+      "missionId": "6",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:05:47.615Z"
+    },
+    {
+      "id": "08df",
+      "userId": "1",
+      "missionId": "6",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:05:48.765Z"
+    },
+    {
+      "id": "3e73",
+      "userId": "1",
+      "missionId": "6",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:05:55.662Z"
+    },
+    {
+      "id": "6143",
+      "userId": "1",
+      "missionId": "6",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:06:00.557Z"
+    },
+    {
+      "id": "884c",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:09:39.665Z"
+    },
+    {
+      "id": "1bbc",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:09:40.958Z"
+    },
+    {
+      "id": "0e04",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:09:41.935Z"
+    },
+    {
+      "id": "3731",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:09:43.191Z"
+    },
+    {
+      "id": "d62d",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:09:44.091Z"
+    },
+    {
+      "id": "2644",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:09:44.859Z"
+    },
+    {
+      "id": "1c0d",
+      "userId": "1",
+      "missionId": "2",
+      "status": "confirmed",
+      "joinedAt": "2026-02-19T23:09:45.429Z"
     }
   ]
 }

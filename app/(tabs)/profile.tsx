@@ -36,7 +36,7 @@ export default function ProfileScreen() {
     return (
         <ScrollView
             className="flex-1 bg-slate-50"
-            contentContainerStyle={{ paddingBottom: 40 }}
+            contentContainerStyle={{ paddingBottom: 120 }}
         >
             {/* Profile Header */}
             <View
